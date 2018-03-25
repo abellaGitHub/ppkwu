@@ -9,8 +9,13 @@ app.use(bodyParser.json());
 
 app.post('/api/email', (req, res) => {
 	var body = req.body;
-
+	var email = body.email;
 	
+	if(email && email !== '' && email.indexOf('@') !== -1) {
+		body.valid = true;
+	} else {
+		body.valid = false;
+	}
 	
 	res.setHeader('content-type', 'application/json');
 	res.end(JSON.stringify(req.body));
